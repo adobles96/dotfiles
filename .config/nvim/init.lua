@@ -29,6 +29,18 @@ vim.o.undofile = true
 vim.o.scrolloff = 8
 
 -- ---------------------------------------------------------------------------
+-- Soft-wrap for prose-heavy filetypes
+-- ---------------------------------------------------------------------------
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "markdown", "text" },
+    callback = function()
+        vim.opt_local.wrap = true
+        vim.opt_local.linebreak = true
+        vim.opt.showbreak = '↪  '
+    end,
+})
+
+-- ---------------------------------------------------------------------------
 -- Auto-reload files changed externally (e.g. by Claude Code agents)
 -- ---------------------------------------------------------------------------
 vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
