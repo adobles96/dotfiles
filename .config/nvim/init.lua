@@ -86,18 +86,9 @@ require("lazy").setup({
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         config = function()
-            require("nvim-treesitter").setup()
-            local wanted = { "python", "lua", "bash", "json", "yaml", "markdown", "markdown_inline" }
-            local installed = require("nvim-treesitter").get_installed()
-            local installed_set = {}
-            for _, p in ipairs(installed) do installed_set[p] = true end
-            local missing = {}
-            for _, p in ipairs(wanted) do
-                if not installed_set[p] then table.insert(missing, p) end
-            end
-            if #missing > 0 then
-                vim.cmd("TSInstall " .. table.concat(missing, " "))
-            end
+            require("nvim-treesitter").setup({
+                ensure_installed = { "python", "lua", "bash", "json", "yaml", "markdown", "markdown_inline" },
+            })
         end,
     },
 
