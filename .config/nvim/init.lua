@@ -32,7 +32,7 @@ vim.o.scrolloff = 8
 -- Auto-reload files changed externally (e.g. by Claude Code agents)
 -- ---------------------------------------------------------------------------
 vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
-    command = "if mode() != 'c' | checktime | endif",
+    command = "if mode() != 'c' && getcmdwintype() == '' | checktime | endif",
 })
 
 -- ---------------------------------------------------------------------------
@@ -88,6 +88,11 @@ require("lazy").setup({
         config = function()
             require("nvim-treesitter").setup({
                 ensure_installed = { "python", "lua", "bash", "json", "yaml", "markdown", "markdown_inline" },
+            })
+            vim.api.nvim_create_autocmd("FileType", {
+                callback = function()
+                    pcall(vim.treesitter.start)
+                end,
             })
         end,
     },
