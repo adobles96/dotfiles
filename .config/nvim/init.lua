@@ -87,7 +87,7 @@ require("lazy").setup({
         "nvim-telescope/telescope.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
         keys = {
-            { "<leader>ff", "<cmd>Telescope find_files<CR>", desc = "Find files" },
+            { "<leader>ff", "<cmd>Telescope find_files hidden=true no_ignore=true<CR>", desc = "Find files" },
             { "<leader>fg", "<cmd>Telescope live_grep<CR>",  desc = "Live grep" },
             { "<leader>fb", "<cmd>Telescope buffers<CR>",    desc = "Buffers" },
         },
@@ -211,6 +211,7 @@ require("lazy").setup({
     -- ── File explorer ──────────────────────────────────────────────────
     {
         "stevearc/oil.nvim",
+        lazy = false,
         keys = {
             { "<leader>e", "<cmd>Oil<CR>", desc = "File explorer" },
         },
