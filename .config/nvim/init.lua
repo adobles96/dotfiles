@@ -99,7 +99,7 @@ require("lazy").setup({
         build = ":TSUpdate",
         config = function()
             require("nvim-treesitter").setup({
-                ensure_installed = { "python", "lua", "bash", "json", "yaml", "markdown", "markdown_inline" },
+                ensure_installed = { "python", "lua", "bash", "json", "yaml", "markdown", "markdown_inline", "latex" },
             })
             vim.api.nvim_create_autocmd("FileType", {
                 callback = function()
@@ -257,7 +257,12 @@ require("lazy").setup({
         dependencies = { "nvim-treesitter/nvim-treesitter" },
         ft = { "markdown" },
         config = function()
-            require("render-markdown").setup()
+            require("render-markdown").setup({
+                latex = {
+                    enabled = true,
+                    converter = "latex2text",
+                },
+            })
         end,
     },
 }, {
